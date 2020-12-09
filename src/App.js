@@ -12,8 +12,13 @@ export default function App() {
   const fetchQR = async ({ data }) => {
     setIsLoading(true);
     const response = await generateQR(data);
-    console.log(response);
-    setIsLoading(false);
+    response.onload = function () {
+      var imageDataUrl = response.result;
+      // $("#selected-image").attr("src", imageDataUrl)
+      // console.log(imageDataUrl);
+      setImage(imageDataUrl);
+      setIsLoading(false);
+    };
   };
   return (
     <div className="App">
